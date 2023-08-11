@@ -1,0 +1,11 @@
+<div infiniteScroll
+    [infiniteScrollDistance]="2"
+    [infiniteScrollUpDistance]="1.5"
+    (scrolled)="onScrollDown()">
+    <ng-container *ngFor="let article of getArticleList()">
+        <app-article [display]="'Preview'" [content]="article.content">
+        </app-article>
+        <a [routerLink]="['/', category, article.name]">Read more</a>
+        <hr>
+    </ng-container>
+</div>

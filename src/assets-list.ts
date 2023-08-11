@@ -1,0 +1,1 @@
+export const assetsList = [".gitkeep","images/bg.jpg","images/favicon/favicon-144x144.png","images/favicon/favicon-16x16.png","images/favicon/favicon-192x192.png","images/favicon/favicon-32x32.png","images/favicon/favicon-96x96.png"]

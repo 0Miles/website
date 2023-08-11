@@ -1,0 +1,7 @@
+<h1 *ngIf="title">{{ title }}</h1>
+<div *ngIf="date">{{ date | date }}</div>
+<img *ngIf="previewImage" [src]="previewImage.src" [alt]="previewImage.alt" [title]="previewImage.title" />
+<div [innerHTML]="htmlContent"></div>
+<ng-container *ngIf="!content">
+    Article not found
+</ng-container>

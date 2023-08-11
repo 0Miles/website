@@ -17,6 +17,10 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
+            "allowedCommonJsDependencies": [
+                "@master/css",
+                "showdown"
+            ],
             "outputPath": "dist/miles",
             "index": "src/index.html",
             "main": "src/main.ts",

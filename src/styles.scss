@@ -1,1 +1,57 @@
-/* You can add global styles to this file, and also import other style files */
+@import "@master/normal.css";
+@import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&family=Zen+Old+Mincho:wght@400;600&display=swap");
+
+body {
+    background: #333;
+    color: white;
+    overflow-x: hidden;
+    font-family: "Quicksand", sans-serif;
+}
+
+@keyframes borderColor {
+    0% {
+        border-color: rgba(100, 0, 0, 0.35);
+    }
+    16% {
+        border-color: rgba(100, 100, 0, 0.35);
+    }
+    33% {
+        border-color: rgba(0, 100, 0, 0.35);
+    }
+    50% {
+        border-color: rgba(0, 100, 100, 0.35);
+    }
+    67% {
+        border-color: rgba(0, 0, 100, 0.35);
+    }
+    84% {
+        border-color: rgba(100, 0, 100, 0.35);
+    }
+    100% {
+        border-color: rgba(100, 0, 0, 0.35);
+    }
+}
+
+@keyframes bgColor {
+    0% {
+        background: #963c3c;
+    }
+    16% {
+        background: #96963c;
+    }
+    33% {
+        background: #3c963c;
+    }
+    50% {
+        background: #3c9696;
+    }
+    67% {
+        background: #3c3c96;
+    }
+    84% {
+        background: #963c96;
+    }
+    100% {
+        background: #963c3c;
+    }
+}
