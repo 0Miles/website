@@ -1,13 +1,24 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HttpClientModule } from '@angular/common/http';
 import { InfiniteScrollModule } from 'ngx-infinite-scroll';
 import { ArticleComponent } from './article/article.component';
 import { HomeComponent } from './home/home.component';
 import { ArticleListComponent } from './article-list/article-list.component';
+import { RouterModule, Routes, provideRouter, withInMemoryScrolling, withViewTransitions } from '@angular/router'
+
+const routes: Routes = [
+    {
+        path: '',
+        component: HomeComponent
+    },
+    {
+        path: ':articleCategory/:articleFileName',
+        component: ArticleComponent
+    }
+];
 
 @NgModule({
     declarations: [
@@ -18,11 +29,18 @@ import { ArticleListComponent } from './article-list/article-list.component';
     ],
     imports: [
         BrowserModule,
-        AppRoutingModule,
         HttpClientModule,
+        RouterModule,
         InfiniteScrollModule
     ],
-    providers: [],
-    bootstrap: [AppComponent]
+    providers: [
+        provideRouter(
+            routes,
+            withViewTransitions(),
+            withInMemoryScrolling({ scrollPositionRestoration: 'enabled' })
+        )
+    ],
+    bootstrap: [AppComponent],
+    schemas: [CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AppModule { }

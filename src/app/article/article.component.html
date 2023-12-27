@@ -1,7 +1,54 @@
-<h1 *ngIf="title">{{ title }}</h1>
-<div *ngIf="date">{{ date | date }}</div>
-<img *ngIf="previewImage" [src]="previewImage.src" [alt]="previewImage.alt" [title]="previewImage.title" />
-<div [innerHTML]="htmlContent"></div>
+<div class="flex flex:col h:full b:1|solid|gray-36 bg:gray-30 h:full r:5 box-shadow:2|4|3|black/.2 overflow:hidden" *ngIf="display === 'Preview'">
+    <div class="w:full aspect-ratio:16/9 overflow:hidden">
+        <img *ngIf="previewImage"
+             class="w:full h:full object-fit:cover {view-transition-name:{{underlineTitle+'-preview-image'}}}"
+             [src]="previewImage.src" [alt]="previewImage.alt" [title]="previewImage.title" />
+        <div *ngIf="!previewImage" class="w:full h:full bg:black"></div>
+    </div>
+    <div class="flex flex:col flex:1 p:16">
+        <div class="flex justify-content:space-between align-items:center mt:8 mb:16">
+            <h1 *ngIf="title" class="">{{ title }}</h1>
+        </div>
+        <p class="mb:24 flex:1">
+            {{ desc }}
+        </p>
+        <div class="flex flex:wrap align-items:end justify-content:end">
+            <div class="bg:#4b4e53 p:2|8 r:3 ml:4 mb:4" *ngFor="let tag of tags">
+                {{ tag }}
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-container *ngIf="display === 'Full'">
+    <div class="m:0|auto max-w:960 px:32 pb:120">
+        <a class="flex align-items:center my:16" (click)="history.back()">
+            <svg class="mr:4" width="24" height="36" viewBox="7 0 12 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round">
+                <polyline points="15 18 9 12 15 6"></polyline>
+            </svg>
+            Back
+        </a>
+        <h1 *ngIf="title" class="f:36 @transition-down|.5s|ease my:48">{{ title }}</h1>
+        <img *ngIf="previewImage"
+             class="w:full h:full object-fit:cover r:3 {view-transition-name:{{underlineTitle+'-preview-image'}}}"
+             [src]="previewImage.src" [alt]="previewImage.alt" [title]="previewImage.title" />
+    
+        <div class="@transition-up|.3s|ease">
+            <div class="py:16 my:16">
+                <div *ngIf="desc">{{ desc }}</div>
+                <div *ngIf="date" class="flex justify-content:end mb:8 color:gray-70">{{ date | date:'MMM, yyyy' }}</div>
+                <div class="flex justify-content:end">
+                    <div class="bg:#4b4e53 p:2|8 r:3 ml:4 mb:4" *ngFor="let tag of tags">
+                        {{ tag }}
+                    </div>
+                </div>
+            </div>
+            <div class="block markdown-body @transition-up|.5s|ease" [innerHTML]="htmlContent"></div>
+        </div>
+    </div>
+</ng-container>
+
 <ng-container *ngIf="!content">
     Article not found
 </ng-container>

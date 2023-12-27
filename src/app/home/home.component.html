@@ -1,40 +1,42 @@
-<div class="abs w:100vw h:50vh t:center overflow:hidden box-shadow:0|8|10|rgba(0,0,0,.3) hidden" [style.display]="isHeaderShow ? 'block' : ''">
+<div class="abs w:100vw h:50vh t:center overflow:hidden box-shadow:0|8|10|black/.3 hidden" [style.display]="isHeaderShow ? 'block' : ''">
     <div class="abs top:0 left:0 w:100vw h:100vh bg:cover bg:url(assets/images/bg.jpg) bg:center"></div>
 </div>
 
 <header class="abs top:0 left:0 w:100vw h:50vh z:3 hidden" [style.display]="isHeaderShow ? 'block' : ''">
     <div
-         class="abs b:2|solid|rgba(0,0,0,.2) w:calc(50vw-155px) top:calc(50vh-2px) left:0 @borderColor|3s|infinite|linear|forwards">
-    </div>
-    <div
-         class="abs w:310 h:310 top:calc(50vh-155px) left:calc(50vw-155px) border-radius:50% overflow:hidden box-shadow:0|8|10|rgba(0,0,0,.5)">
-        <div
-             class="b:15|solid|rgba(60,0,0,.3) abs w:310 h:310 border-radius:50% z:3 @borderColor|3s|infinite|linear|forwards overflow:hidden">
-            <a (click)="scrollTo(navStaticPoint)"
-               class="abs w:280 h:280 border-radius:50% t:center z:3 user-select:none">
-                <h1 class="mt:80 f:64px font-weight:300">Miles</h1>
-                <div class="f:22 font-weight:300 p:0|15">
-                    Resume and Works
-                </div>
-            </a>
+         class="abs w:310 h:310 top:calc(50vh-155px) left:calc(50vw-155px) border-radius:50% overflow:hidden box-shadow:0|6|10|2|black/.5">
+        <div class="b:15|solid|black/.1 abs w:310 h:310 border-radius:50% z:3 overflow:hidden">
             <div
-                 class="abs top:calc(140px-50vh) left:calc(140px-50vw) w:100vw h:100vh bg:url(assets/images/bg.jpg) bg:center bg:cover filter:blur(10px) z:2">
+                 class="abs top:calc(140px-50vh) left:calc(140px-50vw) w:100vw h:100vh bg:url(assets/images/bg.jpg) bg:center bg:cover filter:blur(4px) z:2">
             </div>
         </div>
+        <a (click)="scrollTo(navStaticPoint)"
+           class="abs top:15 left:15 w:280 h:280 box-shadow:2|4|10|0|black/.3 border-radius:50% t:center z:3 user-select:none border-top:1|solid|white/.25">
+            <h1 class="mt:80 f:64px font-weight:300">Miles</h1>
+            <div class="f:22 font-weight:300 p:0|15">
+                Resume and Works
+            </div>
+        </a>
         <div
-             class="abs top:calc(155px-50vh) left:calc(155px-50vw) w:100vw h:100vh bg:url(assets/images/bg.jpg) bg:center bg:cover filter:blur(3px)">
+             class="abs top:calc(155px-50vh) left:calc(155px-50vw) w:100vw h:100vh bg:url(assets/images/bg.jpg) bg:center bg:cover filter:blur(10px)">
         </div>
     </div>
-    <div
-         class="abs b:2|solid|rgba(0,0,0,.2) w:calc(50vw-155px) top:calc(50vh-2px) right:0 @borderColor|3s|infinite|linear|forwards">
+    <div class="abs w:calc(50vw-155px) bottom:0 left:0 b:1|solid|black/.3">
+    </div>
+    <div class="abs w:calc(50vw-155px) bottom:0 right:0 b:1|solid|black/.3">
     </div>
 </header>
 
-<div class="fixed left:0 w:100vw h:50vh overflow:hidden z:2 hidden" [style.display]="isHeaderShow ? 'block' : ''" [style.bottom]="pageCoverBottom">
+<div [ngClass]="{ 'abs!': pageCoverBottom === 0 }" class="fixed left:0 w:100vw h:50vh overflow:hidden z:2 hidden" [style.display]="isHeaderShow ? 'block' : ''" [style.bottom]="pageCoverBottom + 'px'">
     <div
-         class="abs w:310 h:310 top:-155 left:calc(50vw-155px) border-radius:50% bg:#333 box-shadow:0|-5|10|rgba(0,0,0,.5)|inset z:1">
+         class="abs w:310 h:310 top:-160 left:calc(50vw-155px) border-radius:50% bg:#333 box-shadow:0|-5|10|rgba(0,0,0,.5)|inset z:1 border-bottom:2|solid|gray-72">
     </div>
     <div class="abs top:-50vh left:0 w:100vw h:100vh bg:url(assets/images/bg.jpg) bg:center bg:cover"></div>
+    
+    <div class="abs w:calc(50vw-155px) top:0 left:0 b:1|solid|white/.1">
+    </div>
+    <div class="abs w:calc(50vw-155px) top:0 right:0 b:1|solid|white/.1">
+    </div>
 </div>
 
 
@@ -43,28 +45,19 @@
 <div #navStaticPoint style="height: 50vh;"></div>
 
 <nav class="w:full top:50vh t:center z:0 ~linear|.2s
-            {{isNavShow ? 'opacity:1 filter:blur(0)' : 'opacity:0 filter:blur(10px)'}}
+            {{isNavShow ? 'opacity:1 filter:blur(0)' : 'opacity:0 filter:blur(12px)'}}
             {{isNavStatic ? 'static' : 'fixed'}}
             {rel;m:15;p:5;f:26;inline-block}>a user-select:none
-            {abs;content:'\0000a0';inset:0;block;z:-1;opacity:0;~opacity|.3s|ease-in;@bgColor|3s|infinite|linear|forwards}>a::after 
-            opacity:1>a:hover::after hidden" [style.display]="isHeaderShow ? 'block' : ''">
+            {@bgColor|3s|infinite|linear|forwards;abs;content:'\0000a0';inset:0;block;z:-1;opacity:0;~opacity|.3s|ease-in}>a::after 
+            opacity:1>a:hover::after hidden
+            " [style.display]="isHeaderShow ? 'block' : ''">
     <a (click)="scrollTo(top)">Top</a>
     <a (click)="scrollTo(about)">Card</a>
     <!-- <a href="#experience">Experience</a> -->
     <a (click)="scrollTo(works)">Works</a>
 </nav>
-<a (click)="scrollTo(navStaticPoint)">
-    <div class="fixed bottom:10 right:10 padding:10 t:center bg:rgba(0,0,0,.5) z:1">
-        <svg xmlns="http://www.w3.org/2000/svg" width="36" height="36"
-             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-             stroke-linejoin="round">
-            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-            <path d="M6 15l6 -6l6 6"></path>
-        </svg>
-    </div>
-</a>
 
-<section #about id="about" class="p:35vh|0" >
+<section #about id="about" class="mt:30vh p:35vh|0" >
     <div class="flex flex:col justify-content:center align-items:center">
         <div class="flex justify-content:center align-items:center flex:col@<sm ">
             <div class="w:180 w:128@<sm border-radius:3 overflow:hidden">
@@ -86,7 +79,7 @@
                             <path d="M3 7l9 6l9 -6"></path>
                         </svg>
                     </span>
-                    inbox@miles.tw
+                    inbox&#64;miles.tw
                 </div>
                 <div>
                     <span>
@@ -107,6 +100,6 @@
     </div>
 
 </section>
-<section #works id="works">
+<section #works id="works" class="p:8 m:0|auto max-w:lg mb:180">
     <app-article-list></app-article-list>
 </section>

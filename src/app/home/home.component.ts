@@ -20,7 +20,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
 
     isNavShow = false;
     isNavStatic = false;
-    pageCoverBottom = '0px';
+    pageCoverBottom = 0;
     lastScrollTop = 0;
     isHeaderShow = false;
 
@@ -41,7 +41,7 @@ export class HomeComponent implements OnInit, AfterViewChecked {
     @HostListener('window:scroll', ['$event'])
     onScroll(event: any) {
         const scrollTop = this.document.documentElement.scrollTop;
-        this.pageCoverBottom = `${scrollTop * -1}px`;
+        this.pageCoverBottom = scrollTop * -1;
 
         if (scrollTop > this.lastScrollTop) {
             if (this.isNavShow === false && scrollTop >= (this.navShowPoint?.nativeElement.offsetTop ?? 0)) {

@@ -1,11 +1,11 @@
 <div infiniteScroll
-    [infiniteScrollDistance]="2"
-    [infiniteScrollUpDistance]="1.5"
-    (scrolled)="onScrollDown()">
+     [infiniteScrollDistance]="2"
+     [infiniteScrollUpDistance]="1.5"
+     (scrolled)="onScrollDown()"
+     class="grid-cols:3@lg grid-cols:2@sm grid-cols:1 w:full p:16 gap:16 gap:32@lg">
     <ng-container *ngFor="let article of getArticleList()">
-        <app-article [display]="'Preview'" [content]="article.content">
-        </app-article>
-        <a [routerLink]="['/', category, article.name]">Read more</a>
-        <hr>
+        <a [routerLink]="['/', category, article.name]">
+            <app-article [display]="'Preview'" [content]="article.content"></app-article>
+        </a>
     </ng-container>
 </div>

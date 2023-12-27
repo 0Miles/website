@@ -37,6 +37,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
         this.loadTitle();
         this.loadTag();
         this.loadDate();
+        this.loadDesc();
+        this.loadPreviewImage();
         if (this.display === DisplayType.Preview) {
             this.preview();
         } else {
@@ -55,12 +57,15 @@ export class ArticleComponent implements OnInit, OnDestroy {
     });
 
     title: string = '';
+    underlineTitle: string = '';
     previewWordLimit = 120;
     previewImage: { alt: string, src: string, title: string } = { alt: '', src: '', title: ''};
     date: Date | undefined ;
     tags: string[] = [];
     desc: string = '';
     htmlContent: SafeHtml | undefined;
+
+    history = window.history;
 
     observables: Array<Subscription> = [];
 
@@ -96,6 +101,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         const titleRegexResult = titleRegex.exec(this._content);
         if (titleRegexResult) {
             this.title = titleRegexResult[1] ?? titleRegexResult[2];
+            this.underlineTitle = this.title.replace(/\s/g, '_');
             this._content = this._content.replace(titleRegex, '');
             if (this.display === DisplayType.Full) {
                 this.titleService.setTitle(`Miles - ${this.title}`);
@@ -104,11 +110,14 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     loadTag(): void {
-        const tagRegex = /(?:``([^`]*)``)(?=[\s\S]*(?:^date:))/gm;
-        const tagRegexResult = this._content.match(tagRegex);
-        if (tagRegexResult) {
-            this.tags = tagRegexResult;
-            this._content = this._content.replace(tagRegex, '');
+        const tagLineRegex = /^(?:``[^`]*``\s*)+$/m
+        const tagLineResult = this._content.match(tagLineRegex)?.[0] ?? '';
+
+        if (tagLineResult) {
+            this._content = this._content.replace(tagLineRegex, '');
+            const tagRegex = /(?:``[^`]*``)/g;
+            const tagResult = tagLineResult.match(tagRegex)!;
+            this.tags = tagResult.map((x: string) => x.replace(/``/g, ''));
         }
     }
 
@@ -122,7 +131,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     loadDate(): void {
-        const dateRegex = /(?:^date:\s*((?!0000)\d{4})(?:\/|-)(?:([1-9]|0[1-9]|1[0-2])(?:\/|-)([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])$))/m;
+        const dateRegex = /(?:^date:\s*((?!0000)\d{4})(?:\/|-)(?:([1-9]|0[1-9]|1[0-2])(?:\/|-)([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])\s*$))/m;
         const dateRegexResult = dateRegex.exec(this._content);
         if (dateRegexResult) {
             this.date = new Date(`${dateRegexResult[0].replace('date:', '').trim()}`);
@@ -130,8 +139,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
         }
     }
 
-    preview(): void {
-        const imageRegex = /!\[(.*)\]\((.*?)\s*"(.*[^"])"?\s*\)/;
+    loadPreviewImage(): void {
+        const imageRegex = /!\[(.*)\]\((.*?)\s*(?:"(.*[^"])")?\s*\)/;
         const imageRegexResult = imageRegex.exec(this._content);
         if (imageRegexResult) {
             this.previewImage = {
@@ -140,10 +149,13 @@ export class ArticleComponent implements OnInit, OnDestroy {
                 title: imageRegexResult[3] ?? ''
             };
             this._content = this._content.replace(imageRegex, '');
-        } else {
-            this._content = `${this._content.substring(0, this.previewWordLimit)}...`;
-            this.htmlContent = this.converter.makeHtml(this._content);
         }
+    }
+
+    preview(): void {
+        
+        this._content = `${this._content.substring(0, this.previewWordLimit)}...`;
+        this.htmlContent = this.converter.makeHtml(this._content);
     }
 
     converMarkDown(): void {

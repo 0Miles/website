@@ -42,7 +42,7 @@ export class AppService {
                     );
                 }
             }
-            this.lastArticleIndex[category] = currentLastArticleIndex + count + 1;
+            this.lastArticleIndex[category] = currentLastArticleIndex + count;
             this.isLoading = false;
         }
     }
@@ -53,9 +53,8 @@ export class AppService {
         if (!this.articleFileNameList[category]) {
             this.articleFileNameList[category] = assetsList.filter(x => x.startsWith(`articles/${category}`)).map(x => x.replace(`articles/${category}/`, '').replace(/\.\w+$/, ''));
         }
-        for (let i = 0; i <= count; i++) {
+        for (let i = 0; i < count; i++) {
             const index = startIndex + i;
-            console.log(index)
             if (this.articleFileNameList[category][index]) {
                 promises.push(this.getArticle(category, this.articleFileNameList[category][index]));
             } else {
