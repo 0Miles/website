@@ -8,6 +8,7 @@ import { ArticleComponent } from './article/article.component';
 import { HomeComponent } from './home/home.component';
 import { ArticleListComponent } from './article-list/article-list.component';
 import { RouterModule, Routes, provideRouter, withInMemoryScrolling, withViewTransitions } from '@angular/router'
+import { ImageComponent } from './image/image.component';
 
 const routes: Routes = [
     {
@@ -25,7 +26,8 @@ const routes: Routes = [
         AppComponent,
         ArticleComponent,
         HomeComponent,
-        ArticleListComponent
+        ArticleListComponent,
+        ImageComponent
     ],
     imports: [
         BrowserModule,

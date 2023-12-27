@@ -1,8 +1,8 @@
 <div class="flex flex:col h:full b:1|solid|gray-36 bg:gray-30 h:full r:5 box-shadow:2|4|3|black/.2 overflow:hidden" *ngIf="display === 'Preview'">
     <div class="w:full aspect-ratio:16/9 overflow:hidden">
-        <img *ngIf="previewImage"
-             class="w:full h:full object-fit:cover {view-transition-name:{{underlineTitle+'-preview-image'}}}"
-             [src]="previewImage.src" [alt]="previewImage.alt" [title]="previewImage.title" />
+        <app-image *ngIf="previewImage"
+             class="rel {view-transition-name:{{underlineTitle+'-preview-image'}}}"
+             [src]="previewImage.src" [alt]="previewImage.alt" />
         <div *ngIf="!previewImage" class="w:full h:full bg:black"></div>
     </div>
     <div class="flex flex:col flex:1 p:16">
@@ -29,12 +29,14 @@
             </svg>
             Back
         </a>
-        <h1 *ngIf="title" class="f:36 @transition-down|.5s|ease my:48">{{ title }}</h1>
-        <img *ngIf="previewImage"
-             class="w:full h:full object-fit:cover r:3 {view-transition-name:{{underlineTitle+'-preview-image'}}}"
-             [src]="previewImage.src" [alt]="previewImage.alt" [title]="previewImage.title" />
+        <h1 *ngIf="title" class="f:36 @transition-down|.5s|ease my:48 will-change:transform">{{ title }}</h1>
+
+        <div *ngIf="!!previewImage.src || isLoading" class="w:full aspect-ratio:16/9 r:3 overflow:hidden">
+            <app-image class="rel r:3 overflow:hidden {view-transition-name:{{underlineTitle+'-preview-image'}}}"
+                       [src]="previewImage.src" [alt]="previewImage.alt" />
+        </div>
     
-        <div class="@transition-up|.3s|ease">
+        <div class="@transition-up|.3s|ease will-change:transform">
             <div class="py:16 my:16">
                 <div *ngIf="desc">{{ desc }}</div>
                 <div *ngIf="date" class="flex justify-content:end mb:8 color:gray-70">{{ date | date:'MMM, yyyy' }}</div>
@@ -44,11 +46,11 @@
                     </div>
                 </div>
             </div>
-            <div class="block markdown-body @transition-up|.5s|ease" [innerHTML]="htmlContent"></div>
+            <div class="block markdown-body" [innerHTML]="htmlContent"></div>
         </div>
     </div>
 </ng-container>
 
-<ng-container *ngIf="!content">
+<div class="m:0|auto max-w:960 px:32 pb:120" *ngIf="!content && !isLoading">
     Article not found
-</ng-container>
+</div>

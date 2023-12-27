@@ -92,3 +92,295 @@ body {
         translate: 0;
     }
 }
+
+m-load:not([linear]):not([filled]) {
+    contain: strict;
+    display: block;
+    width: 50px;
+    height: 50px;
+    box-sizing: border-box;
+    animation: spinLoader 1400ms linear infinite;
+    will-change: transform;
+    >i {
+        contain: strict;
+        display: block;
+        width: 100%;
+        height: 100%;
+        opacity: 1;
+        animation: spinRoute 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+        will-change: transform;
+        border-color: inherit; // default: round
+        >i {
+            contain: strict;
+            display: block;
+            float: left;
+            overflow: hidden;
+            width: 50%;
+            height: 100%;
+            border-color: inherit;
+            &:before {
+                contain: strict;
+                content: '';
+                display: block;
+                width: 200%;
+                height: 100%;
+                border-radius: 50%;
+                border-style: solid;
+                border-color: inherit;
+                border-width: 4px;
+                border-bottom-color: transparent;
+                border-right-color: transparent;
+                box-sizing: border-box;
+                will-change: transform;
+                transform: translateY(0);
+                animation: spinClipper 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
+            }
+            &:last-child {
+                transform: rotateY(180deg);
+            }
+        }
+    }
+    &[path=true] {
+        &:before {
+            contain: strict;
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            content: '';
+            border-color: inherit;
+            opacity: .2;
+            border-width: 4px;
+            border-style: solid;
+            border-radius: 50%;
+            box-sizing: border-box;
+        }
+    }
+    &[size=xs] {
+        width: 20px;
+        height: 20px;
+        &[path=true] {
+            &:before {
+                border-width: 2px;
+            }
+        }
+        >i>i {
+            &:before {
+                border-width: 2px;
+            }
+        }
+    }
+    &[size=sm] {
+        width: 36px;
+        height: 36px;
+        &[path=true] {
+            &:before {
+                border-width: 3px;
+            }
+        }
+        >i>i {
+            &:before {
+                border-width: 3px;
+            }
+        }
+    }
+    &[size=lg] {
+        width: 70px;
+        height: 70px;
+    }
+    &[size=xl] {
+        width: 100px;
+        height: 100px;
+    }
+    &[size=lg],
+    &[size=xl] {
+        &[path=true] {
+            &:before {
+                border-width: 5px;
+            }
+        }
+        >i>i {
+            &:before {
+                border-width: 5px;
+            }
+        }
+    }
+    &[theme=white] {
+        border-color: white;
+    }
+}
+
+m-load[filled] {
+    position: relative;
+    display: inline-flex;
+    contain: content;
+    overflow: hidden;
+    width: 100%;
+    &:before {
+        content: '_';
+        float: left;
+        margin-left: -10000%;
+        visibility: hidden;
+        color: transparent;
+        contain: content;
+    }
+    >i {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        margin: auto;
+        height: 100%;
+        width: 100%;
+        contain: strict;
+        display: block;
+        will-change: background-image;
+        transform: translateZ(0);
+        background: #3d3d3d;
+    }
+    &:not([static]) {
+        >i {
+            animation-duration: 1s;
+            animation-fill-mode: forwards;
+            animation-iteration-count: infinite;
+            animation-timing-function: linear;
+            animation-name: placeholderAnimate;
+            background-image: linear-gradient(to right, #3d3d3d 2%, #313131 18%, #3d3d3d 33%);
+            background-size: 1300px;
+        }
+    }
+}
+
+@keyframes placeholderAnimate {
+    0% {
+        background-position: -650px 0;
+    }
+    100% {
+        background-position: 650px 0;
+    }
+}
+
+@keyframes spinLoader {
+    to {
+        transform: rotate(360deg)
+    }
+}
+
+@keyframes spinRoute {
+    12.5% {
+        transform: rotate(135deg);
+    }
+    /* 0.5 * ARCSIZE */
+    25% {
+        transform: rotate(270deg);
+    }
+    /* 1   * ARCSIZE */
+    37.5% {
+        transform: rotate(405deg);
+    }
+    /* 1.5 * ARCSIZE */
+    50% {
+        transform: rotate(540deg);
+    }
+    /* 2   * ARCSIZE */
+    62.5% {
+        transform: rotate(675deg);
+    }
+    /* 2.5 * ARCSIZE */
+    75% {
+        transform: rotate(810deg);
+    }
+    /* 3   * ARCSIZE */
+    87.5% {
+        transform: rotate(945deg);
+    }
+    /* 3.5 * ARCSIZE */
+    to {
+        transform: rotate(1080deg);
+    }
+    /* 4   * ARCSIZE */
+}
+
+@keyframes spinClipper {
+    from {
+        transform: rotate(130deg);
+    }
+    50% {
+        transform: rotate(-5deg);
+    }
+    to {
+        transform: rotate(130deg);
+    }
+}
+
+m-load[linear] {
+    contain: strict;
+    display: block;
+    height: 4px;
+    width: 100%;
+    border-radius: 2px;
+    overflow: hidden;
+    transform: translate(0, 0);
+    background-color: rgba(20, 25, 30, .03);
+    mask-image: radial-gradient(circle, black, black);
+    -webkit-mask-image: -webkit-radial-gradient(circle, black, black);
+    i {
+        contain: style size layout;
+        border-radius: inherit;
+        &:before,
+        &:after {
+            contain: strict;
+            position: absolute;
+            background-color: inherit;
+            border-radius: inherit;
+            content: '';
+            top: 0;
+            left: 0;
+            bottom: 0;
+            will-change: left, right;
+        }
+        &:before {
+            animation: stretch 2.2s cubic-bezier(0.650, 0.815, 0.735, 0.395) infinite;
+        }
+        &:after {
+            animation: stretchShort 2.2s cubic-bezier(0.165, 0.840, 0.440, 1.000) infinite;
+            animation-delay: 1.15s;
+        }
+    }
+    &[theme=white] {
+        background-color: rgba(255, 255, 255, .1);
+        i {
+            background-color: white;
+        }
+    }
+}
+
+@keyframes stretch {
+    0% {
+        left: -35%;
+        right: 100%;
+    }
+    60% {
+        left: 100%;
+        right: -90%;
+    }
+    100% {
+        left: 100%;
+        right: -90%;
+    }
+}
+
+@keyframes stretchShort {
+    0% {
+        left: -200%;
+        right: 100%;
+    }
+    60% {
+        left: 107%;
+        right: -8%;
+    }
+    100% {
+        left: 107%;
+        right: -8%;
+    }
+}

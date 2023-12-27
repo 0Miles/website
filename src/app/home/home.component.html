@@ -27,7 +27,7 @@
     </div>
 </header>
 
-<div [ngClass]="{ 'abs!': pageCoverBottom === 0 }" class="fixed left:0 w:100vw h:50vh overflow:hidden z:2 hidden" [style.display]="isHeaderShow ? 'block' : ''" [style.bottom]="pageCoverBottom + 'px'">
+<div [ngClass]="{ 'abs!': pageCoverBottom >= 0 }" class="fixed left:0 w:100vw h:50vh overflow:hidden z:2 hidden" [style.display]="isHeaderShow ? 'block' : ''" [style.bottom]="pageCoverBottom + 'px'">
     <div
          class="abs w:310 h:310 top:-160 left:calc(50vw-155px) border-radius:50% bg:#333 box-shadow:0|-5|10|rgba(0,0,0,.5)|inset z:1 border-bottom:2|solid|gray-72">
     </div>

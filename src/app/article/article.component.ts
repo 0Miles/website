@@ -22,10 +22,15 @@ export class ArticleComponent implements OnInit, OnDestroy {
         if (article) {
             this.content = article.content;
         } else {
+            this.isLoading = true;
             this.appService.getArticle(this.articleCategory ?? '', `${this.articleFileName}`)
                 .then(result => {
                     this.content = result?.body ?? '';
-                });
+                    this.isLoading = false;
+                })
+                .catch(_ => {
+                    this.isLoading = false;
+                })
         }
     }
     get articleFileName(): string {
@@ -56,6 +61,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
         smoothLivePreview: true
     });
 
+    isLoading: boolean = false;
     title: string = '';
     underlineTitle: string = '';
     previewWordLimit = 120;
@@ -155,7 +161,6 @@ export class ArticleComponent implements OnInit, OnDestroy {
     preview(): void {
         
         this._content = `${this._content.substring(0, this.previewWordLimit)}...`;
-        this.htmlContent = this.converter.makeHtml(this._content);
     }
 
     converMarkDown(): void {
