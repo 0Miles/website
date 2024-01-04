@@ -1,24 +1,32 @@
-<div class="abs w:100vw h:50vh t:center overflow:hidden box-shadow:0|8|10|black/.3 hidden" [style.display]="isHeaderShow ? 'block' : ''">
-    <div class="abs top:0 left:0 w:100vw h:100vh bg:cover bg:url(assets/images/bg.jpg) bg:center"></div>
+<div class="abs block 
+            w:100vw h:50vh h:50lvh!@supports(height:50lvh) 
+            t:center overflow:hidden box-shadow:0|8|10|black/.3">
+    <div class="abs top:0 left:0 w:100vw h:100vh h:100lvh!@supports(height:50lvh) 
+                bg:cover bg:url(assets/images/bg.jpg) bg:center">
+    </div>
 </div>
 
-<header class="abs top:0 left:0 w:100vw h:50vh z:3 hidden" [style.display]="isHeaderShow ? 'block' : ''">
-    <div
-         class="abs w:310 h:310 top:calc(50vh-155px) left:calc(50vw-155px) border-radius:50% overflow:hidden box-shadow:0|6|10|2|black/.5">
-        <div class="b:15|solid|black/.1 abs w:310 h:310 border-radius:50% z:3 overflow:hidden">
-            <div
-                 class="abs top:calc(140px-50vh) left:calc(140px-50vw) w:100vw h:100vh bg:url(assets/images/bg.jpg) bg:center bg:cover filter:blur(4px) z:2">
+<header class="abs block top:0 left:0 w:100vw h:50vh h:50lvh!@supports(height:50lvh) z:6 user-drag:none">
+    <div class="abs w:310 h:310 
+                top:calc(50vh-155px) left:calc(50vw-155px) border-radius:50% 
+                overflow:hidden box-shadow:0|6|10|2|black/.5">
+        <div class="b:15|solid|black/.1 abs w:310 h:310 border-radius:50% overflow:hidden">
+            <div class="abs top:calc(140px-50vh) left:calc(140px-50vw) w:100vw h:100vh h:100lvh!@supports(height:50lvh) 
+                        bg:url(assets/images/bg.jpg) bg:center bg:cover filter:blur(4px) z:2">
             </div>
         </div>
         <a (click)="scrollTo(navStaticPoint)"
-           class="abs top:15 left:15 w:280 h:280 box-shadow:2|4|10|0|black/.3 border-radius:50% t:center z:3 user-select:none border-top:1|solid|white/.25">
+           class="abs top:15 left:15 w:280 h:280 
+                  box-shadow:2|4|10|0|black/.3 border-radius:50% 
+                  t:center z:3 user-select:none border-top:1|solid|white/.25">
             <h1 class="mt:80 f:64px font-weight:300">Miles</h1>
             <div class="f:22 font-weight:300 p:0|15">
                 Resume and Works
             </div>
         </a>
-        <div
-             class="abs top:calc(155px-50vh) left:calc(155px-50vw) w:100vw h:100vh bg:url(assets/images/bg.jpg) bg:center bg:cover filter:blur(10px)">
+        <div class="abs top:calc(155px-50vh) left:calc(155px-50vw) 
+                    w:100vw h:100vh h:100lvh!@supports(height:50lvh) 
+                    bg:url(assets/images/bg.jpg) bg:center bg:cover filter:blur(10px)">
         </div>
     </div>
     <div class="abs w:calc(50vw-155px) bottom:0 left:0 b:1|solid|black/.3">
@@ -27,79 +35,305 @@
     </div>
 </header>
 
-<div [ngClass]="{ 'abs!': pageCoverBottom >= 0 }" class="fixed left:0 w:100vw h:50vh overflow:hidden z:2 hidden" [style.display]="isHeaderShow ? 'block' : ''" [style.bottom]="pageCoverBottom + 'px'">
-    <div
-         class="abs w:310 h:310 top:-160 left:calc(50vw-155px) border-radius:50% bg:#333 box-shadow:0|-5|10|rgba(0,0,0,.5)|inset z:1 border-bottom:2|solid|gray-72">
+<div [ngClass]="{ 'abs!': pageCoverTop < 1 }"
+     class="fixed block left:0 w:100vw  h:50vh h:50lvh!@supports(height:50lvh) top:50vh overflow:hidden z:5"
+     [style.transform]="'translateY(' + pageCoverTop + 'px)'">
+    <div class="abs w:310 h:310 top:-160 left:calc(50vw-155px) 
+                border-radius:50% bg:#202020 box-shadow:0|-5|10|rgba(0,0,0,.5)|inset 
+                z:1 border-bottom:2|solid|gray-72">
     </div>
-    <div class="abs top:-50vh left:0 w:100vw h:100vh bg:url(assets/images/bg.jpg) bg:center bg:cover"></div>
-    
+    <div class="abs top:-50vh left:0 w:100vw h:100vh h:100lvh!@supports(height:50lvh) 
+                bg:url(assets/images/bg.jpg) bg:center bg:cover">
+    </div>
+
     <div class="abs w:calc(50vw-155px) top:0 left:0 b:1|solid|white/.1">
     </div>
     <div class="abs w:calc(50vw-155px) top:0 right:0 b:1|solid|white/.1">
     </div>
 </div>
 
+<div #top class="h:20%"></div>
+<div #navShowPoint class="h:15%"></div>
+<div #navStaticPoint class="h:50%"></div>
 
-<div #top style="height: 20vh;"></div>
-<div #navShowPoint style="height: 15vh;"></div>
-<div #navStaticPoint style="height: 50vh;"></div>
-
-<nav class="w:full top:50vh t:center z:0 ~linear|.2s
+<nav class="w:full top:50vh t:center z:0 ~linear|.2s block
             {{isNavShow ? 'opacity:1 filter:blur(0)' : 'opacity:0 filter:blur(12px)'}}
             {{isNavStatic ? 'static' : 'fixed'}}
             {rel;m:15;p:5;f:26;inline-block}>a user-select:none
             {@bgColor|3s|infinite|linear|forwards;abs;content:'\0000a0';inset:0;block;z:-1;opacity:0;~opacity|.3s|ease-in}>a::after 
-            opacity:1>a:hover::after hidden
-            " [style.display]="isHeaderShow ? 'block' : ''">
-    <a (click)="scrollTo(top)">Top</a>
-    <a (click)="scrollTo(about)">Card</a>
-    <!-- <a href="#experience">Experience</a> -->
+            opacity:1>a:hover::after
+            ">
+    <a (click)="scrollTo(about)">About</a>
+    <a (click)="scrollTo(experience)">Experience</a>
     <a (click)="scrollTo(works)">Works</a>
 </nav>
 
-<section #about id="about" class="mt:30vh p:35vh|0" >
-    <div class="flex flex:col justify-content:center align-items:center">
-        <div class="flex justify-content:center align-items:center flex:col@<sm ">
-            <div class="w:180 w:128@<sm border-radius:3 overflow:hidden">
-                <img src="https://avatars.githubusercontent.com/u/8224584" width="100%" alt="avatar">
+
+<section class="rel mt:60vh mt:60lvh!@supports(height:50lvh) 
+                mb:30vh mb:30lvh!@supports(height:50lvh) h:200vh h:200lvh!@supports(height:50lvh)">
+    <div class="flex flex:col position:sticky top:0 
+                pb:18 z:1 h:100vh 
+                justify-content:center overflow:hidden bg:#191919">
+        <h1 #about
+            class="abs top:64 ml:-.3em 
+                   sans-serif font-weight:900 px:16 px:32@sm 
+                   f:25vw f:15vw@sm color:gray-24 lh:.9 user-select:none">
+            About
+        </h1>
+        <div
+             class="flex flex:col align-self:center
+                    mt:64
+                    f:16 f:20@sm
+                    lh:1.5em
+                    max-w:768 p:16 r:3
+                    text-indent:2em>p">
+            <p>
+                I am a full-stack engineer who values attention to detail and always keeps the end user in mind. I
+                prioritize aspects
+                such as performance, accessibility, UI/UX, maintainability, and scalability in my work. I have over 3
+                years of experience working remotely with an overseas company.
+            </p>
+
+            <div class="mt:20">
+                <h2 class="my:16 sans-serif color:gray-32 user-select:none f:32 f:48@sm">Skills</h2>
+                <div class="f:14 f:16@sm 
+                            {inline-block;bg:#4b4e53;p:2|8;r:3;mr:4;mb:4;white-space:nowrap;lh:1.5em}>span">
+                    <span>JavaScript</span>
+                    <span>TypeScript</span>
+                    <span>React / Next.js</span>
+                    <span>Angular</span>
+                    <span>Node.js</span>
+                    <span>C#</span>
+                    <span>.Net</span>
+                </div>
             </div>
-            <div class="m:24 pb:8
-                    {m:8|0}>div
-                    {inline-block;mr:6;vertical-align:middle}>div>span
-            ">
-                <h1 class="f:32 mb:12">Miles Huang</h1>
-                <div>
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                             stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z">
-                            </path>
-                            <path d="M3 7l9 6l9 -6"></path>
-                        </svg>
-                    </span>
-                    inbox&#64;miles.tw
-                </div>
-                <div>
-                    <span>
-                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
-                             viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
-                             stroke-linejoin="round">
-                            <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
-                            <path
-                                  d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5">
-                            </path>
-                        </svg>
-                    </span>
-                    0miles
-                </div>
-                
+        </div>
+        <div class="abs w:100% h:100%  bottom:0 filter:drop-shadow(0|-2|5|black/.5) pointer-events:none">
+            <div class="w:100% h:100% bg:#202020 clip-path:polygon(0|100%,100%|100%,100%|82%,0|100%)">
             </div>
         </div>
     </div>
-
+    <div class="abs z:2 top:0 left:0 right:0 h:100vh filter:drop-shadow(0|8|5|black/.3)">
+        <div class="w:full h:full 
+                    flex flex:col justify-content:center align-items:center 
+                    bg:#202020 clip-path:polygon(0|0,100%|0,100%|82%,0%|100%)">
+            <div class="rel z:2 flex flex:col 
+                    justify-content:center align-items:center 
+                    w:fit mx:auto p:16 r:2 
+                    bg:gray-20 box-shadow:2|2|5|black/.5 
+                    bg:url('https://avatars.githubusercontent.com/u/8224584')|no-repeat 
+                    background-size:cover background-blend-mode:multiply">
+                <div class="flex flex:col@<sm  align-items:center@<sm">
+                    <div class="w:180 w:128@<sm my:20@<sm border-radius:3 overflow:hidden">
+                        <img src="https://avatars.githubusercontent.com/u/8224584" width="100%" alt="avatar">
+                    </div>
+                    <div class="mx:24
+                                {inline-block;mr:6;vertical-align:middle}>div>div>svg
+                                flex flex:1 flex:col
+                                justify-content:space-between">
+                        <h1 class="f:32">Miles Huang</h1>
+                        <div class="flex:1"></div>
+                        <div class="{mt:8;mb:4}>div">
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path
+                                          d="M3 7a2 2 0 0 1 2 -2h14a2 2 0 0 1 2 2v10a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-10z">
+                                    </path>
+                                    <path d="M3 7l9 6l9 -6"></path>
+                                </svg>
+                                inbox&#64;miles.tw
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
+                                     viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none"
+                                     stroke-linecap="round"
+                                     stroke-linejoin="round">
+                                    <path stroke="none" d="M0 0h24v24H0z" fill="none"></path>
+                                    <path
+                                          d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5">
+                                    </path>
+                                </svg>
+                                0miles
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="my:32 flex
+                        {mx:8;r:3;p:8;~background|.3s}>a
+                        bg:gray-36>a:hover
+                        {w:32;h:32}>a>svg">
+                <a href="https://github.com/0Miles" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path
+                              d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+                    </svg>
+                </a>
+                <a href="https://twitter.com/milestw" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+                        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+                    </svg>
+                </a>
+                <a href="https://discordapp.com/users/347738300909617152" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M8 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                        <path d="M14 12a1 1 0 1 0 2 0a1 1 0 0 0 -2 0" />
+                        <path
+                              d="M15.5 17c0 1 1.5 3 2 3c1.5 0 2.833 -1.667 3.5 -3c.667 -1.667 .5 -5.833 -1.5 -11.5c-1.457 -1.015 -3 -1.34 -4.5 -1.5l-.972 1.923a11.913 11.913 0 0 0 -4.053 0l-.975 -1.923c-1.5 .16 -3.043 .485 -4.5 1.5c-2 5.667 -2.167 9.833 -1.5 11.5c.667 1.333 2 3 3.5 3c.5 0 2 -2 2 -3" />
+                        <path d="M7 16.5c3.5 1 6.5 1 10 0" />
+                    </svg>
+                </a>
+                <a href="https://www.facebook.com/profile.php?id=100008061212664" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M7 10v4h3v7h4v-7h3l1 -4h-4v-2a1 1 0 0 1 1 -1h3v-4h-3a5 5 0 0 0 -5 5v2h-3" />
+                    </svg>
+                </a>
+                <a href="https://www.linkedin.com/in/miles-huang-874509a7/" target="_blank">
+                    <svg xmlns="http://www.w3.org/2000/svg"
+                         viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round"
+                         stroke-linejoin="round">
+                        <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+                        <path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z" />
+                        <path d="M8 11l0 5" />
+                        <path d="M8 8l0 .01" />
+                        <path d="M12 16l0 -5" />
+                        <path d="M16 16v-3a2 2 0 0 0 -4 0" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+    </div>
 </section>
-<section #works id="works" class="p:8 m:0|auto max-w:lg mb:180">
-    <app-article-list></app-article-list>
+
+<section #experience class="mb:30vh">
+    <div class="position:sticky top:0 z:1">
+        <h1 class="mb:64@sm ml:-.45em 
+                   sans-serif font-weight:900 px:16 px:32@sm 
+                   f:18vw f:12vw@sm 
+                   color:gray-24 lh:.9 user-select:none ">
+            Experience
+        </h1>
+    </div>
+
+    <div class="rel z:2 max-w:768 m:0|auto p:16 pl:32">
+        <ul class="list-style:circle
+                   {mt:32;mb:64;rel}>li
+                   {font-weight:normal;f:20}>li>h1
+                   {my:4}>li>h2
+                   {color:gray-60;mb:8}>li>div
+                   {mt:16;f:16}>li>p">
+            <li>
+                <h1>
+                    Master.co
+                    <span class="inline-block vertical-align:bottom 
+                                 f:12 p:2|8 r:3 mr:4 mb:4 
+                                 white-space:nowrap lh:1em bg:#4b4e53">
+                        Volunteer
+                    </span>
+                </h1>
+                <h2>
+                    Full Stack Developer
+                </h2>
+                <div>
+                    2022 - Now
+                </div>
+                <p>
+                    Master CSS is an atomic CSS framework whose syntax closely resembles native CSS. My involvement
+                    includes a small portion
+                    of the syntax, some website development work, and creating related utility programs(e.g., VS Code
+                    IntelliSense, ESLint plugin).
+                </p>
+            </li>
+
+            <li>
+                <h1>
+                    Everyware Limited
+                    <span class="inline-block vertical-align:bottom 
+                                 f:12 p:2|8 r:3 mr:4 mb:4 
+                                 white-space:nowrap lh:1em bg:green-32">
+                        Remote
+                    </span>
+                </h1>
+                <h2>
+                    Full Stack Developer
+                </h2>
+                <div>
+                    2018 - 2023
+                </div>
+                <p>
+                    Everyware is a restaurant systems software company. I'm responsible for developing new POS system
+                    features, fixing
+                    software errors, and improving functionalities in the customer management backend.
+                </p>
+            </li>
+
+            <li>
+                <h1>
+                    Aoyue Design
+                </h1>
+                <h2>
+                    Full Stack Developer
+                </h2>
+                <div>
+                    2018 - 2023
+                </div>
+                <p>
+                    AoyueDesign is a web development outsourcing company.
+                </p>
+            </li>
+        </ul>
+
+        <h2 class="sans-serif color:gray-32 user-select:none f:32 f:48@sm mt:64 mb:-16">Education</h2>
+        <ul class="list-style:circle
+                   {my:32;rel}>li
+                   {font-weight:normal;f:20}>li>h1
+                   {my:4}>li>h2
+                   {color:gray-60;mb:8}>li>div">
+            <li>
+                <h1>
+                    National Taiwan University of Science and Technology
+                </h1>
+                <h2>
+                    Bachelor of Business Administration
+                </h2>
+                <div>
+                    2014 - 2019
+                </div>
+                <p>
+                    Studying Information Management.
+                </p>
+            </li>
+        </ul>
+    </div>
+</section>
+
+<section #works class="rel z:3 bg:#202020">
+    <div class="position:sticky top:0 z:1">
+        <h1 class="ml:-.3em 
+                   sans-serif font-weight:900 px:16 px:32@sm 
+                   f:25vw f:15vw@sm color:gray-24 lh:.9 
+                   user-select:none">
+            Works
+        </h1>
+    </div>
+    <div class="rel z:2 p:8 m:0|auto max-w:lg mb:180">
+        <app-article-list></app-article-list>
+    </div>
 </section>

@@ -2,7 +2,7 @@
 ![cover](/assets/images/works/dogebeats/cover.jpeg)  
 desc: Doge meme themed rhythm game.  
 date: 2015-12-01  
-``Visual Basic.Net`` ``DxLibrary``
+``Visual Basic .NET`` ``DxLibrary``
 
 ## Responsibilities
 - Graphic Design

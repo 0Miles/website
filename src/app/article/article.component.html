@@ -1,4 +1,4 @@
-<div class="flex flex:col h:full b:1|solid|gray-36 bg:gray-30 h:full r:5 box-shadow:2|4|3|black/.2 overflow:hidden" *ngIf="display === 'Preview'">
+<div class="flex flex:col h:full b:1|solid|gray-36 bg:gray-26 h:full r:5 box-shadow:2|4|3|black/.2 overflow:hidden" *ngIf="display === 'Preview'">
     <div class="w:full aspect-ratio:16/9 overflow:hidden">
         <app-image *ngIf="previewImage"
              class="rel {view-transition-name:{{underlineTitle+'-preview-image'}}}"
@@ -13,7 +13,7 @@
             {{ desc }}
         </p>
         <div class="flex flex:wrap align-items:end justify-content:end">
-            <div class="bg:#4b4e53 p:2|8 r:3 ml:4 mb:4" *ngFor="let tag of tags">
+            <div class="bg:#4b4e53 p:2|8 r:3 ml:4 mb:4 white-space:nowrap" *ngFor="let tag of tags">
                 {{ tag }}
             </div>
         </div>
@@ -29,25 +29,23 @@
             </svg>
             Back
         </a>
-        <h1 *ngIf="title" class="f:36 @transition-down|.5s|ease my:48 will-change:transform">{{ title }}</h1>
+        <h1 *ngIf="title" class="f:36 @transition-down|.5s|ease my:48">{{ title }}</h1>
 
         <div *ngIf="!!previewImage.src || isLoading" class="w:full aspect-ratio:16/9 r:3 overflow:hidden">
             <app-image class="rel r:3 overflow:hidden {view-transition-name:{{underlineTitle+'-preview-image'}}}"
                        [src]="previewImage.src" [alt]="previewImage.alt" />
         </div>
     
-        <div class="@transition-up|.3s|ease will-change:transform">
-            <div class="py:16 my:16">
-                <div *ngIf="desc">{{ desc }}</div>
-                <div *ngIf="date" class="flex justify-content:end mb:8 color:gray-70">{{ date | date:'MMM, yyyy' }}</div>
-                <div class="flex justify-content:end">
-                    <div class="bg:#4b4e53 p:2|8 r:3 ml:4 mb:4" *ngFor="let tag of tags">
-                        {{ tag }}
-                    </div>
+        <div class="py:16 my:16 @transition-up|.3s|ease">
+            <div *ngIf="desc">{{ desc }}</div>
+            <div *ngIf="date" class="flex justify-content:end my:8 color:gray-70">{{ date | date:'MMM, yyyy' }}</div>
+            <div class="flex flex:wrap justify-content:end">
+                <div class="bg:#4b4e53 p:2|8 r:3 ml:4 mb:4 white-space:nowrap" *ngFor="let tag of tags">
+                    {{ tag }}
                 </div>
             </div>
-            <div class="block markdown-body" [innerHTML]="htmlContent"></div>
         </div>
+        <div class="block markdown-body" [innerHTML]="htmlContent"></div>
     </div>
 </ng-container>
 

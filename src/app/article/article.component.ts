@@ -110,7 +110,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
             this.underlineTitle = this.title.replace(/\s/g, '_');
             this._content = this._content.replace(titleRegex, '');
             if (this.display === DisplayType.Full) {
-                this.titleService.setTitle(`Miles - ${this.title}`);
+                this.titleService.setTitle(`${this.title} - Miles`);
             }
         }
     }

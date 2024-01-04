@@ -2,7 +2,7 @@
 ![cover](/assets/images/works/pada/cover.jpeg)  
 desc: NTUST school restaurant online ordering APP.  
 date: 2015-09-01  
-``Python Flask`` ``HTML`` ``CSS``
+``Flask`` ``HTML`` ``CSS``
 
 ## Responsibilities
 - UI design

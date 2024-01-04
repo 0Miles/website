@@ -1,4 +1,4 @@
-# CLCC Booking Dashborad
+# CLCC Booking Dashboard
 ![cover](/assets/images/works/clcc/cover.jpeg)  
 desc: CLCC Management Interface for Homepage Information, Room Types, Customer Booking, and More.  
 date: 2020-04-20  

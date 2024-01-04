@@ -20,6 +20,7 @@ export class ArticleListComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        this.appService.loadArticles(this.loadQuantity, this.category);
     }
 
     onScrollDown(): void {

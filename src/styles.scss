@@ -1,12 +1,22 @@
 @import "@master/normal.css";
 @import "github-markdown-css";
 @import url("https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400&family=Zen+Old+Mincho:wght@400;600&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;900&display=swap');
 
+html, body {
+    height: 100%;
+}
 body {
-    background: #333;
-    color: white;
+    display: block;
+    overflow-y: scroll;
     overflow-x: hidden;
+    background: #202020;
+    color: white;
     font-family: "Quicksand", sans-serif;
+}
+
+.sans-serif {
+    font-family: 'Playfair Display', serif;
 }
 
 .markdown-body {
@@ -93,6 +103,28 @@ body {
     }
 }
 
+
+@keyframes parallax {
+    from {
+        transform: translateY(-40%);
+    }
+
+    to {
+        transform: translateY(30%);
+    }
+}
+
+
+@keyframes parallax-sm {
+    from {
+        transform: translateY(-30%);
+    }
+
+    to {
+        transform: translateY(50%);
+    }
+}
+
 m-load:not([linear]):not([filled]) {
     contain: strict;
     display: block;
@@ -100,7 +132,6 @@ m-load:not([linear]):not([filled]) {
     height: 50px;
     box-sizing: border-box;
     animation: spinLoader 1400ms linear infinite;
-    will-change: transform;
     >i {
         contain: strict;
         display: block;
@@ -108,7 +139,6 @@ m-load:not([linear]):not([filled]) {
         height: 100%;
         opacity: 1;
         animation: spinRoute 5332ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
-        will-change: transform;
         border-color: inherit; // default: round
         >i {
             contain: strict;
@@ -131,7 +161,6 @@ m-load:not([linear]):not([filled]) {
                 border-bottom-color: transparent;
                 border-right-color: transparent;
                 box-sizing: border-box;
-                will-change: transform;
                 transform: translateY(0);
                 animation: spinClipper 1333ms cubic-bezier(0.4, 0.0, 0.2, 1) infinite both;
             }
@@ -234,7 +263,6 @@ m-load[filled] {
         width: 100%;
         contain: strict;
         display: block;
-        will-change: background-image;
         transform: translateZ(0);
         background: #3d3d3d;
     }
@@ -337,7 +365,6 @@ m-load[linear] {
             top: 0;
             left: 0;
             bottom: 0;
-            will-change: left, right;
         }
         &:before {
             animation: stretch 2.2s cubic-bezier(0.650, 0.815, 0.735, 0.395) infinite;
