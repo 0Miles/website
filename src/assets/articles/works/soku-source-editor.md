@@ -1,6 +1,6 @@
 # Soku Source Editor
 ![cover](/assets/images/works/soku-source-editor/cover.jpeg)  
-desc: Used for editing the mod source for the SokuLauncher mod store, managing and publishing mods on the source.  
+desc: Used for editing the mod source for the SokuLauncher mod center, managing and publishing mods on the source.  
 date: 2023-12-26  
 ``React`` ``Master CSS`` ``Electron``
 
