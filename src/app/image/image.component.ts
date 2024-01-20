@@ -2,26 +2,31 @@ import { Component, ViewChild, ElementRef, AfterViewInit, Input } from '@angular
 
 @Component({
     selector: 'app-image',
-    templateUrl: './image.component.html',
-    styleUrls: ['./image.component.scss'],
+    templateUrl: './image.component.html'
 })
 
 export class ImageComponent implements AfterViewInit {
-    @ViewChild('image') image: ElementRef<HTMLImageElement> | any;
-    @ViewChild('placeholder') placeholder: ElementRef<HTMLDivElement> | any;
+    @ViewChild('image') image: ElementRef<HTMLImageElement> | undefined;
+    @ViewChild('placeholder') placeholder: ElementRef<HTMLDivElement> | undefined;
 
     @Input() src: string = '';
     @Input() alt: string = '';
     @Input() className: string = '';
 
     ngAfterViewInit() {
-        this.image.nativeElement.onload = () => {
-            this.onImageLoad();
-        };
+        if (this.image) {
+            this.image.nativeElement.onload = () => {
+                this.onImageLoad();
+            };
+        } 
     }
 
     onImageLoad() {
-        this.placeholder.nativeElement.style.display = 'none';
-        this.image.nativeElement.style.opacity = 1;
+        if (this.placeholder) {
+            this.placeholder.nativeElement.style.display = 'none';
+        }
+        if (this.image) {
+            this.image.nativeElement.style.opacity = '1';
+        } 
     }
 }

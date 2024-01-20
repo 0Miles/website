@@ -1,11 +1,10 @@
 import { DOCUMENT } from '@angular/common';
-import { AfterViewChecked, ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, OnInit, ViewChild } from '@angular/core';
+import { ChangeDetectionStrategy, Component, ElementRef, HostListener, Inject, OnInit, ViewChild } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-home',
     templateUrl: './home.component.html',
-    styleUrls: ['./home.component.scss'],
     changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class HomeComponent implements OnInit {
@@ -35,28 +34,41 @@ export class HomeComponent implements OnInit {
     }
 
     @HostListener('window:scroll', ['$event'])
-    onScroll(event: any) {
+    onScroll(_: any) {
         const scrollTop = this.document.documentElement.scrollTop;
-        this.pageCoverTop = scrollTop > 0 ? scrollTop : 0;
+        
+        if (scrollTop < this.document.documentElement.clientHeight) {
+            this.pageCoverTop = scrollTop > 0 ? scrollTop : 0;
+            this.handleScrollDirection(scrollTop);
+        }
+    }
 
+    private handleScrollDirection(scrollTop: number) {
         if (scrollTop > this.lastScrollTop) {
-            if (this.isNavShow === false && scrollTop >= (this.navShowPoint?.nativeElement.offsetTop ?? 0)) {
-                this.isNavShow = true;
-            }
-
-            if (this.isNavStatic === false && scrollTop >= (this.navStaticPoint?.nativeElement.offsetTop ?? 0)) {
-                this.isNavStatic = true;
-            }
-
+            this.handleScrollDown(scrollTop);
         } else {
-            if (this.isNavShow === true && scrollTop < (this.navShowPoint?.nativeElement.offsetTop ?? 0)) {
-                this.isNavShow = false;
-            }
-
-            if (this.isNavStatic === true && scrollTop < (this.navStaticPoint?.nativeElement.offsetTop ?? 0)) {
-                this.isNavStatic = false;
-            }
+            this.handleScrollUp(scrollTop);
         }
         this.lastScrollTop = scrollTop;
+    }
+
+    private handleScrollDown(scrollTop: number) {
+        if (this.isNavShow === false && scrollTop >= (this.navShowPoint?.nativeElement.offsetTop ?? 0)) {
+            this.isNavShow = true;
+        }
+
+        if (this.isNavStatic === false && scrollTop >= (this.navStaticPoint?.nativeElement.offsetTop ?? 0)) {
+            this.isNavStatic = true;
+        }
+    }
+
+    private handleScrollUp(scrollTop: number) {
+        if (this.isNavShow === true && scrollTop < (this.navShowPoint?.nativeElement.offsetTop ?? 0)) {
+            this.isNavShow = false;
+        }
+
+        if (this.isNavStatic === true && scrollTop < (this.navStaticPoint?.nativeElement.offsetTop ?? 0)) {
+            this.isNavStatic = false;
+        }
     }
 }

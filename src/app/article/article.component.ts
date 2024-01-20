@@ -7,15 +7,14 @@ import { DomSanitizer, SafeHtml, Title } from '@angular/platform-browser';
 
 @Component({
     selector: 'app-article',
-    templateUrl: './article.component.html',
-    styleUrls: ['./article.component.scss']
+    templateUrl: './article.component.html'
 })
 export class ArticleComponent implements OnInit, OnDestroy {
 
-    @Input() display: DisplayType | any;
+    @Input() display: DisplayType | string = DisplayType.Full;
     @Input() articleCategory: string | undefined;
 
-    private _articleFileName: string | any;
+    private _articleFileName: string | undefined;
     @Input() set articleFileName(value: string) {
         this._articleFileName = value;
         const article: any = this.appService.articleList[this.articleCategory ?? '']?.find((x: any) => x.name === this.articleFileName);
@@ -33,7 +32,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
                 })
         }
     }
-    get articleFileName(): string {
+    get articleFileName(): string | undefined {
         return this._articleFileName;
     }
     private _content: string = '';
@@ -65,8 +64,8 @@ export class ArticleComponent implements OnInit, OnDestroy {
     title: string = '';
     underlineTitle: string = '';
     previewWordLimit = 120;
-    previewImage: { alt: string, src: string, title: string } = { alt: '', src: '', title: ''};
-    date: Date | undefined ;
+    previewImage: { alt: string, src: string, title: string } = { alt: '', src: '', title: '' };
+    date: Date | undefined;
     tags: string[] = [];
     desc: string = '';
     htmlContent: SafeHtml | undefined;
@@ -99,11 +98,11 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     ngOnDestroy(): void {
-        this.observables.map(obs => obs.unsubscribe());
+        this.observables.forEach(obs => obs.unsubscribe());
     }
 
     loadTitle(): void {
-        const titleRegex = /#\ (.*)|#(.*)/;
+        const titleRegex = /#\s*(.*)/;
         const titleRegexResult = titleRegex.exec(this._content);
         if (titleRegexResult) {
             this.title = titleRegexResult[1] ?? titleRegexResult[2];
@@ -116,14 +115,20 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     loadTag(): void {
-        const tagLineRegex = /^(?:``[^`]*``\s*)+$/m
-        const tagLineResult = this._content.match(tagLineRegex)?.[0] ?? '';
+        const tagLineRegex = /^(?:``[^`]*``\s*)+$/m;
+        const tagLineResult = tagLineRegex.exec(this._content)?.[0] ?? '';
 
         if (tagLineResult) {
             this._content = this._content.replace(tagLineRegex, '');
-            const tagRegex = /(?:``[^`]*``)/g;
-            const tagResult = tagLineResult.match(tagRegex)!;
-            this.tags = tagResult.map((x: string) => x.replace(/``/g, ''));
+            const tagRegex = /``([^`]*)``/g;
+            let tagResult: RegExpExecArray | null;
+            const tags: string[] = [];
+
+            while ((tagResult = tagRegex.exec(tagLineResult)) !== null) {
+                tags.push(tagResult[1]);
+            }
+
+            this.tags = tags;
         }
     }
 
@@ -137,7 +142,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     loadDate(): void {
-        const dateRegex = /(?:^date:\s*((?!0000)\d{4})(?:\/|-)(?:([1-9]|0[1-9]|1[0-2])(?:\/|-)([1-9]|0[1-9]|1[0-9]|2[0-9]|3[0-1])\s*$))/m;
+        const dateRegex = /(?:^date:\s*((?!0000)\d{4})[\/-](?:([1-9]|0[1-9]|1[0-2])[\/-]([1-9]|0[1-9]|1\d|2\d|3[0-1])\s*$))/m;
         const dateRegexResult = dateRegex.exec(this._content);
         if (dateRegexResult) {
             this.date = new Date(`${dateRegexResult[0].replace('date:', '').trim()}`);
@@ -159,7 +164,7 @@ export class ArticleComponent implements OnInit, OnDestroy {
     }
 
     preview(): void {
-        
+
         this._content = `${this._content.substring(0, this.previewWordLimit)}...`;
     }
 
